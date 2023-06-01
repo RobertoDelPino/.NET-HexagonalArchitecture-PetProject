@@ -1,0 +1,37 @@
+﻿@model IEnumerable<PetProject_4.Domain.Models.UserProject>;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Tus proyectos</h1>
+
+<p>
+    <a asp-action="Create">Añadir un nuevo proyecto</a>
+</p>
+
+<section class="d-flex">
+    @foreach (var item in Model){
+        <div class="card mb-3 mx-2" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="@Html.DisplayFor(modelItem => item.image)" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+                        <p class="card-text"><a href="@Html.DisplayFor(modelItem => item.page)" target="_blank">URL Página</a></p>
+                        <p class="card-text"><a href="@Html.DisplayFor(modelItem => item.repository)" target="_blank">Repositorio</a></p>
+                        <p class="card-text">
+                            <a asp-action="Edit" asp-route-id="@item.ProjectId">Editar</a> |
+                            <a asp-action="Details" asp-route-id="@item.ProjectId">Detalles</a> |
+                            <a class="text-danger" asp-action="Delete" asp-route-id="@item.ProjectId">Eliminar</a>
+                        </p>
+                        <p class="card-text"><small class="text-body-secondary">Fecha de creación: @Html.DisplayFor(modelItem => item.date)</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</section>
